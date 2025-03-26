@@ -33,7 +33,7 @@ export class UserController {
         next: NextFunction
     ): Promise<void | any> => {
         try{
-            const userId = parseInt(req.params.id);
+            const userId = req.params.id;
             const user = await this.userService.getUserById(userId)
             if(!user){
                return res.status(404).json({message: "User not found"});
@@ -63,7 +63,7 @@ export class UserController {
         next: NextFunction
     ):Promise<void | any> => {
         try{
-            const userId = parseInt(req.params.id);
+            const userId = req.params.id;
             const userData = req.body as Partial<CreateUserDTO>
             const updateUser = await this.userService.updateUser(userId,userData)
             res.status(200).json(updateUser);
@@ -78,7 +78,7 @@ export class UserController {
         next: NextFunction
     ):Promise<void | any> => {
         try{
-            const userId = parseInt(req.params.id);
+            const userId = req.params.id;
             const deleteUser = await this.userService.deleteUser(userId)
             res.status(200).json(deleteUser);
         } catch(error){
@@ -86,83 +86,4 @@ export class UserController {
         }
     };
        
-    public profile = async (
-        req: CustomRequest,
-        res: Response,
-        next: NextFunction
-    ): Promise<void | any> => {
-        try{
-            const id = req.userAuth;
-            const user = await this.userService.getUserById(Number(id))
-
-            res.status(StatusCodes.OK).json({
-                error: false,
-                message: "User profile retrieved successfully",
-                data: user, 
-            });
-        } catch(error){
-            next(error)
-        }
-    }
-
-    public updateProfilePic = async (
-        req: CustomRequest,
-        res: Response,
-        next: NextFunction
-      ): Promise<void> => {
-        try {
-          const userId = req.userAuth; 
-
-          console.log("Decoded User ID:", req.userAuth);
-
-          if (!userId) {
-            res.status(401).json({
-              error: true,
-              message: "Unauthorized. User ID missing in token.",
-            });
-            return;
-          }
-         
-          if (!req.file || !req.file.path) {
-            res.status(400).json({
-              error: true,
-              message: "No profile image uploaded",
-            });
-            return;
-          }
-
-          console.log("Uploaded file details:", req.file);
-      
-          const profilePicUrl = req.file.path; // Cloudinary URL after upload
-          await this.userService.updateProfilePic(Number(userId), {
-            profilePic: profilePicUrl,
-          });
-      
-          res.status(200).json({
-            error: false,
-            message: "Profile picture updated successfully",
-            data: { profilePic: profilePicUrl },
-          });
-        } catch (error) {
-          next(error);
-        }
-      };
-
-      public setPassword = async (
-        req: CustomRequest,
-        res: Response,
-        next: NextFunction
-      ): Promise<void> => {
-        try{
-          const id = req.userAuth;
-          const data = req.body as ChangePasswordDTO;
-          await this.userService.setPassword(Number(id), data);
-          res.status(StatusCodes.OK).json({
-            error: false,
-            message: "Password changed successfully",
-          })
-        }catch(error){
-          next(error)
-        }
-      }
 }

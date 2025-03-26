@@ -11,7 +11,9 @@ export class DocumentController {
 
     public createDocument = async (req: CustomRequest, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { title, content } = req.body;
+            // const { title, content } = req.body;
+            const title = "Untitled Document"
+            const content = ""
             const userId = req.userAuth || ''
 
             const document = await this.documentService.createDocument(userId, title, content);

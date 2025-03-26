@@ -15,14 +15,14 @@ export const isAdmin = async (
     try{
         const user = await db.user.findUnique({
          where: {
-             id: Number(req.userAuth)
+             id: req.userAuth
          }
         })
  
         if(!user){
           throw new CustomError(StatusCodes.NOT_FOUND, "user not found")
         }
-        if(user.role === Role.ADMIN){
+        if(user.role === Role.OWNER){
            next()
         } else{
          throw new CustomError(StatusCodes.FORBIDDEN, "Access denied")

@@ -74,7 +74,7 @@ export class DocumentServiceImpl implements DocumentService {
         const document = await prisma.document.findUnique({
           where: { id: documentId },
         });
-    
+        
         if (!document) throw new Error("Document not found");
     
         // Update the document content

@@ -13,5 +13,4 @@ documentRouter.put("/update", authenticateUser, documentController.updateDocumen
 documentRouter.get("/:documentId/permissions", documentController.getDocumentPermissions);
 documentRouter.post("/save", documentController.saveDocument);
 
-
 export default documentRouter;

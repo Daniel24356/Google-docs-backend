@@ -5,13 +5,10 @@ import { ChangePasswordDTO } from "../../dto/resetPassword.auth.dto";
 
    export interface UserService {
        createUser(data: CreateUserDTO): Promise<User>;
-       getUserById(id: number): Promise<User | null>;
+       getUserById(id: string): Promise<User | null>;
        getAllUsers(): Promise<User[]>;
-       updateUser(id: number, data: Partial<CreateUserDTO>): Promise<User>;
-       deleteUser(id: number): Promise<void>;
-       profile(id: number): Promise<Omit<User, "password">>
-       setPassword(id: number, data: ChangePasswordDTO): Promise<void>
-       updateProfilePic(id: number, data: { profilePic: string }): Promise<Object | any>;
+       updateUser(id: string, data: Partial<CreateUserDTO>): Promise<User>;
+       deleteUser(id: string): Promise<void>;
 }
     //    addUser(id: number): Promise<void>
    
