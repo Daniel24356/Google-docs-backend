@@ -1,0 +1,25 @@
+[
+    {
+      "firstName": "Adebayo",
+      "lastName": "Michael",
+      "email": "mcgamma04@yahoo.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "emailVerified": true
+    },
+    {
+      "firstName": "Henshaw",
+      "lastName": "Kingsley",
+      "email": "henz@gmail.com",
+      "password": "12345",
+      "role": "INSTRUCTOR",
+      "emailVerified": true
+    },{
+      "firstName": "Bola",
+      "lastName": "Tinubu",
+      "email": "bola@gmail.com",
+      "password": "12345",
+      "role": "INSTRUCTOR",
+      "emailVerified": true
+    }
+  ]
